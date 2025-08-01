@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | saharsh </title>
+
+    <link rel="icon" type="png|image" href="/IMAGES/saharshlogo.png">
+
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
+  <style>
+  * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Courier New', Courier, monospace;
+    }
+
+    body {
+      background: black;
+      color: #00ff00;
+      overflow: hidden;
+    }
+
+
+    .centered {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+
+    #introImage {
+      width: 700px;
+      border-radius: 50%;
+      opacity: 0;
+      transition: opacity 2s ease-in-out;
+    }
+
+    #loginForm {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    #loginBtn {
+  background-color: #0f0; /* green matrix-like glow */
+  color: black;
+  border: none;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 8px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  box-shadow: 0 0 10px #0f0, 0 0 20px #0f0, 0 0 30px #0f0;
+  transition: all 0.3s ease;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+
+#loginBtn:hover {
+  transform: rotateX(15deg) rotateY(15deg);
+  box-shadow: 0 0 20px #0f0, 0 0 40px #0f0;
+}
+
+
+    input {
+      padding: 10px;
+      background: #111;
+      border: 1px solid #00ff00;
+      color: #00ff00;
+      outline: none;
+    }
+
+    .login-input {
+  background-color: black;
+  color: #0f0;
+  border: 2px solid #0f0;
+  padding: 12px;
+  margin: 10px 0;
+  width: 80%;
+  font-size: 16px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px #0f0, 0 0 20px #0f0 inset;
+  transition: all 0.3s ease;
+  outline: none;
+  transform-style: preserve-3d;
+}
+
+.login-input:focus {
+  transform: rotateX(10deg);
+  box-shadow: 0 0 20px #0f0, 0 0 40px #0f0 inset;
+}
+
+
+    #binaryScreen {
+      display: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: black;
+      color: #00ff00;
+      font-size: 30px;
+      padding: 20px;
+      white-space: pre-wrap;
+      overflow-y: auto;
+    }
+
+    #mainContent {
+      display: none;
+      padding: 2rem;
+    }
+
+    .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 10%;
+    background: transparent;
+    background: linear-gradient(45deg, rgba(0, 0, 0, 0.548), green, rgba(0, 0, 0, 0.548));
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    /* border-radius: 100px; */
+}
+
+.logo {
+    font-size: 25px;
+    color: green;
+    text-shadow: 5px 5px 10px black;
+    text-decoration: none;
+    font-weight: 600;
+    pointer-events: none;
+    opacity: 0;
+    animation: slideTop 1s ease forwards;
+    
+}
+
+.navbar a {
+    display: inline-block;
+    font-size: 25px;
+    color: green;
+    text-shadow: 5px 5px 10px black;
+    text-decoration: none;
+    font-weight: 600;
+    margin-left: 35px;
+    opacity: 0;
+    animation: slideTop .5s ease forwards;
+    animation-delay: calc(.2s * var(--i));
+}
+.navbar a::after {
+    content: '';
+    width: 0;
+    height: 2px;
+    background: black;
+    border-radius: 50%;
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+    transition: 0.6s;
+}
+
+.navbar a:hover::after {
+    width: 100%;
+}
+
+.navbar a:hover {
+    background: linear-gradient(45deg, rgb(0, 0, 0), rgb(0, 0, 0));
+    -webkit-text-fill-color: transparent;
+    background-clip: border-box;
+    -webkit-background-clip: text;
+}
+
+.home {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 70px 10% 0;
+}
+
+.home-content {
+    max-width: 600px;
+    padding: 50px;
+    /* margin-left: -30px; */
+}
+
+.home-content h1 {
+    font-size: 56px;
+    font-weight: 700;
+    line-height: 1.2;
+    opacity: 0;
+    animation: slideRight 1s ease forwards;
+    animation-delay: .7s;
+}   
+
+.home-content h3 {
+    font-size: 32px;
+    font-weight: 700;
+    opacity: 0;
+    animation: slideLeft 1s ease forwards;
+    animation-delay: 1s;
+}
+
+.mu {
+    margin-top: 50px;
+}
+
+.home-content h1, h3 {
+    text-shadow: 5px 4px 10px green;
+}
+
+.home-content h3 span {
+    color: rgb(0, 255, 0);
+}
+
+.home-content p {
+    font-size: 16px;
+    margin: 20px 0 0;
+    text-align: left;
+    opacity: 0;
+    animation: slideLeft 1s ease forwards;
+    animation-delay: 1.3s;
+}
+
+.home-sci a {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    background: black;
+    border: 2px solid green;
+    border-radius: 50%;
+    font-size: 20px;
+    color: green;
+    text-decoration: none;
+    margin: 30px 15px 30px 0;
+    opacity: 0;
+    animation: zoomIn 1s ease forwards;
+    animation-delay: 0.4s;
+    
+}
+
+.home-sci a:hover {
+    background: green;
+    color: black;
+    box-shadow: 0 0 20px green;
+}
+
+.btn-box {
+    display: inline-block;
+    padding: 12px 28px;
+    background: green;
+    border-radius: 40px;
+    font-size: 16px;
+    color: black;
+    letter-spacing: 1px;
+    text-decoration: none;
+    font-weight: 600;
+    opacity: 0;
+    animation: zoomIn 1s ease forwards;
+    animation-delay: 0.4s;
+}
+
+.btn-box:hover {
+    box-shadow: 0 0 5px green,
+    0 0 25px green, 0 0 50px green,
+    0 0 100px green, 0 0 200px green;
+}
+
+.home-img {
+    width: 410px;
+    height: 410px;
+    opacity: 0;
+    animation: zoomIn 1s ease forwards, floatImage 4s ease-in-out infinite;
+    animation-delay: 2.1s, 3.1s;
+}
+
+.home-img .glowing-circle {
+    width: 100%;
+    height: 100%;
+   
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.home-img .glowing-circle::after {
+    content: '';
+    position: absolute;
+    width: 380px;
+    height: 380px;
+    background-color:black;
+    border-radius: 50%;
+}
+
+.glowing-circle span {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(black, rgba(0, 128, 0, 0.411));
+    border-radius: 50%;
+    animation: circleRotate 5s linear infinite;
+}
+
+.glowing-circle span:nth-child(1) {
+    filter: blur(10px);
+}
+
+.image img {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%);
+    max-width: 350px;
+    object-fit: cover;
+}
+
+.glowing-circle .image {
+    position: relative;
+    width: 380px;
+    height: 380px;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.navbar-1 a {
+    font-size: 18px;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    margin-left: 50px;
+    text-align-last: center;
+}
+
+.navbar-1 a.active, 
+.navbar-1 a:hover {
+    background: linear-gradient(45deg, rgb(0, 0, 0), rgb(0, 0, 0));
+    -webkit-text-fill-color: transparent;
+    background-clip: border-box;
+    -webkit-background-clip: text;
+}
+
+canvas {
+    position: fixed;
+    top: auto;
+    left: auto;
+    background-color: black;
+    z-index: -1;
+    background-size:cover;
+    background-blend-mode: multiply;
+    background-size: auto;
+    scroll-behavior: smooth;
+}
+
+
+/* ---------------------------About----------------------- */
+
+.about {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 70px 10% 0;
+    margin-top: 10% ;
+}
+    
+.about-img img{
+    padding: auto;
+}
+
+.about-content h3{
+    font-size: 32px;
+    font-weight: 700;
+    opacity: 0;
+    animation: slideLeft 1s ease forwards;
+    animation-delay: 1s;
+}
+
+.about-content p{
+    font-size: 16px;
+    margin: 20px 0 0;
+    text-align: left;
+    opacity: 0;
+    animation: slideLeft 1s ease forwards;
+    animation-delay: 1.3s;
+}
+
+.section {
+  padding: 60px 20px;
+  background-color: #0a0a0a;
+  color: #00ff00;
+  font-family: 'Courier New', monospace;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 40px;
+  text-shadow: 0 0 10px #00ff00;
+}
+
+.project-grid {
+  display: grid;
+  gap: 40px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  padding: 0 20px;
+}
+
+.project-card {
+  background: #111;
+  padding: 20px;
+  border: 2px solid #00ff00;
+  border-radius: 12px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px #00ff00;
+  background: #0f0f0f;
+}
+
+.contact-section {
+  text-align: center;
+}
+
+.contact-info {
+  margin-top: 30px;
+  font-size: 1.1rem;
+  line-height: 2rem;
+}
+
+.contact-info a {
+  color: #00ff00;
+  text-decoration: underline;
+}
+
+.contact-info a:hover {
+  color: #fff;
+}
+
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(5, 255, 204, 0.15);
+  backdrop-filter: blur(8px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.popup-content {
+  background: #111;
+  color: #00ff00;
+  padding: 30px;
+  border-radius: 15px;
+  border: 2px solid #00ff00;
+  max-width: 600px;
+  width: 90%;
+  box-shadow: 0 0 25px #00ff00;
+  animation: zoomIn 0.3s ease-in-out;
+  text-align: left;
+  font-family: 'Courier New', monospace;
+}
+
+.close-btn {
+  background: transparent;
+  border: 2px solid #00ff00;
+  color: #00ff00;
+  padding: 10px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: 0.3s;
+}
+
+.close-btn:hover {
+  background: #00ff00;
+  color: #000;
+}
+
+@keyframes zoomIn {
+  from {
+    transform: scale(0.7);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+/* Animation */
+
+@keyframes slideTop {
+    0% {
+        opacity: 0;
+        transform: translateY(100px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }    
+}
+
+@keyframes slideRight {
+    0% {
+        opacity: 0;
+        transform: translateX(-100px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }    
+}
+
+@keyframes slideLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(100px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }    
+}
+
+@keyframes zoomIn {
+    0% {
+        opacity: 0;
+        transform: scale(0);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes floatImage {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-24px);
+    }
+
+    100%{
+        transform: translate(0);
+    }
+}
+
+@keyframes circleRotate {
+    0% {
+        transform: rotate(0);
+    }
+    
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  </style>
+</head>
+<body>
+  <div class="centered" id="intro">
+    <img src="assets/entry_image.png" id="introImage" alt="Saharsh Hegde" />
+  </div>
+
+  <div class="centered" id="loginForm">
+ <input type="text" id="username" placeholder="Username" class="login-input" />
+<input type="password" id="password" placeholder="Password" class="login-input" />
+
+    <button id="loginBtn" onclick="startHacking()">Access Terminal</button>
+  </div>
+
+   <div id="binaryScreen"></div>
+</div>
+
+  <div id="mainContent">
+     <canvas id="matrixCanvas"></canvas>
+                                                        <!-- Matrix -->
+    <script src="/JAVASCRIPT/matrix.js"></script>
+
+    <header class="header">
+        <a href="#" class="logo"> Anonymous </a>
+
+        <nav class="navbar">
+            <a href="#home" style="--i:1;" class="active">Home</a>
+            <a href="#about" style="--i:2;">About</a>
+            <a href="#skills" style="--i:3;">Skills</a>
+            <a href="#projects" style="--i:4;">Projects</a>
+            <a href="#contact" style="--i:5;">Contact</a>
+        </nav>
+    </header>
+
+    <section id="home" class="home">
+
+        <div class="home-content" data-scroll data-scroll-speed="-5" >
+            <h3 class="mu">Hello, It's me</h3>
+            <h1>Saharsh Hegde</h1>
+            <h3>And I'm a <span class="pro-text">
+                <script>
+                   var typed = new Typed(".pro-text", {
+                      strings: [
+                        "Ethical Hacker",
+                        "Pentester",
+                        "Programmer",
+                        "Linux Administrator",
+                        "Network Administrator",
+                        "Cyber Forensic Expert"
+                      ],
+                      typeSpeed: 100,   
+                      backSpeed: 100,   
+                      backDelay: 1000,  
+                      loop: true        
+                    });
+                </script>
+            </span></h3>
+            
+            <p>  &emsp; &emsp;This portfolio highlights my passion for cybersecurity and my commitment to ethical practices. <br> <br>
+                &emsp; &emsp;Cybersecurity enthusiast prepping for CEH, skilled in pentesting, cryptography, and threat modeling. 
+                Hands-on with top tools, certified by Cisco, IIT, Udemy. Tech leader, anchor, and district powerlifting gold medalist. <br> <br>
+                &emsp; &emsp;Found multiple Bugs on bugcrowd.  
+            </p>
+
+            <div class="home-sci">
+                <a href="https://github.com/SAI127001" target="_blank"><i class='bx bxl-github'></i></a>
+                <a href="https://www.linkedin.com/in/saharshhegde/" target="_blank"><i class='bx bxl-linkedin' ></i></a>
+                <a href="https://wa.me/7208691266" target="_blank"><i class='bx bxl-whatsapp'></i></a>
+                <a href="https://www.instagram.com/saharsh_hegde/" target="_blank"><i class='bx bxl-instagram'></i></a>
+            </div>
+           <a href="assets/Resume Saharsh Santosh Hegde.pdf" class="btn-box" download="">Download CV</a>
+        </div>
+
+        <div class="home-img">
+            <div class="glowing-circle">
+                <span></span>
+                <span></span>
+                <div class="image">
+                    <img src="assets/saharsh_image.png" alt="">
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <section id="about" style="min-height: 100vh; background-color: #000; color: #00ff00; display: flex; align-items: center; justify-content: center; padding: 4rem;">
+  <div style="max-width: 900px;">
+    <h2 style="font-size: 2.5rem; margin-bottom: 1rem; border-bottom: 2px solid #00ff00;">About Me</h2>
+    <p style="font-size: 1.2rem; line-height: 1.8; font-family: 'Courier New', monospace;">
+      I'm a passionate <strong>cybersecurity enthusiast</strong> and <strong>ethical hacker</strong>, currently preparing for the <strong>CEH certification</strong>.
+      Over time, I’ve mastered tools like <strong>Burp Suite, Metasploit, Nmap, Nessus, Wireshark, SQLMap</strong> and <strong>Aircrack-ng</strong>, while completing simulated environments on <strong>Hack The Box</strong> and <strong>TryHackMe</strong>.
+
+      <br><br>
+
+      I’ve built live security projects including:
+      <ul style="list-style-type: square; padding-left: 20px;">
+        <li>🛡️ <strong>Phishing Page Detector using Python & Flask</strong></li>
+        <li>🕵️‍♂️ <strong>Malware Analysis Sandbox (MITRE ATT&CK based)</strong></li>
+        <li>🔐 <strong>Secure Login Portal using SHA-256 + CAPTCHA + 2FA</strong></li>
+        <li>🌐 <strong>Real-Time Port Scanner with Nmap & Web GUI</strong></li>
+      </ul>
+
+      <br>
+
+      I’ve also participated in bug bounty programs and discovered bugs on <strong>Bugcrowd</strong> and <strong>HackerOne</strong> (privately disclosed). I’m currently working on building a <strong>VR Ethical Hacking Simulator</strong> and a <strong>Cybersecurity Awareness Website</strong>.
+
+      <br><br>
+
+      Outside the console, I lead tech events, anchor shows, and have even bagged a <strong>district-level gold medal in powerlifting</strong>. I believe in hacking ethically, thinking like an attacker, and defending like a pro.
+    </p>
+  </div>
+</section>
+
+    <section id="skills" style="min-height: 100vh; background-color: #000; color: #00ff00; padding: 4rem;">
+  <div style="max-width: 1100px; margin: auto;">
+    <h2 style="font-size: 2.5rem; border-bottom: 2px solid #00ff00; margin-bottom: 2rem;">Skills & Certifications</h2>
+
+    <!-- Cybersecurity Skills -->
+    <div style="display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 3rem;">
+      <div style="flex: 1 1 250px; background-color: #020202; border: 1px solid #00ff00; padding: 1rem; border-radius: 8px;">
+        <h3>🛡️ Network Security</h3>
+        <p>Firewalls, VPNs, IDS/IPS, IPsec</p>
+      </div>
+      <div style="flex: 1 1 250px; background-color: #020202; border: 1px solid #00ff00; padding: 1rem; border-radius: 8px;">
+        <h3>🕵️‍♂️ Penetration Testing</h3>
+        <p>Burp Suite, Metasploit, SQLMap, Nmap</p>
+      </div>
+      <div style="flex: 1 1 250px; background-color: #020202; border: 1px solid #00ff00; padding: 1rem; border-radius: 8px;">
+        <h3>💀 Ethical Hacking</h3>
+        <p>TryHackMe, HTB, CEH Prep, OSINT</p>
+      </div>
+      <div style="flex: 1 1 250px; background-color: #020202; border: 1px solid #00ff00; padding: 1rem; border-radius: 8px;">
+        <h3>🔐 Cryptography</h3>
+        <p>Hashing, Symmetric/Asymmetric, Encoding</p>
+      </div>
+      <div style="flex: 1 1 250px; background-color: #020202; border: 1px solid #00ff00; padding: 1rem; border-radius: 8px;">
+        <h3>🧠 Threat Modeling</h3>
+        <p>OWASP Top 10, MITRE ATT&CK, STRIDE</p>
+      </div>
+      <div style="flex: 1 1 250px; background-color: #020202; border: 1px solid #00ff00; padding: 1rem; border-radius: 8px;">
+        <h3>⚙️ Tools & Platforms</h3>
+        <p>Wireshark, Nessus, Aircrack-ng, Splunk</p>
+      </div>
+    </div>
+
+    <!-- Certificates -->
+    <h3 style="font-size: 1.8rem; margin-bottom: 1rem;">📜 Certifications</h3>
+    <div style="display: flex; flex-wrap: wrap; gap: 2rem;">
+      
+      <div style="flex: 1 1 250px; background-color: #020202; border: 1px solid #00ff00; border-radius: 8px; padding: 1rem;">
+        <img src="assets/rstforum.png" alt="RSTForum" style="width: 100%; border-radius: 8px; margin-bottom: 0.5rem;">
+        <p><strong>RSTForum - CCNA Certificate</strong></p>
+      </div>
+
+      <div style="flex: 1 1 250px; background-color: #020202; border: 1px solid #00ff00; border-radius: 8px; padding: 1rem;">
+        <img src="assets/simpli_ethical_hack.png" alt="Simplilearn" style="width: 100%; border-radius: 8px; margin-bottom: 0.5rem;">
+        <p><strong>Simplilearn - Ethical Hacker</strong></p>
+      </div>
+
+      <div style="flex: 1 1 250px; background-color: #020202; border: 1px solid #00ff00; border-radius: 8px; padding: 1rem;">
+        <img src="assets/deloite_cyber.png" alt="Forage" style="width: 100%; border-radius: 8px; margin-bottom: 0.5rem;">
+        <p><strong>Deloite - Cyber Security Simulation</strong></p>
+      </div>
+
+      <div style="flex: 1 1 250px; background-color: #020202; border: 1px solid #00ff00; border-radius: 8px; padding: 1rem;">
+        <img src="assets/cisco_cyber.png" alt="Cisco" style="width: 100%; border-radius: 8px; margin-bottom: 0.5rem;">
+        <p><strong>Cisco Networking Academy - Cybersecurity</strong></p>
+      </div>
+
+      <div style="flex: 1 1 250px; background-color: #020202; border: 1px solid #00ff00; border-radius: 8px; padding: 1rem;">
+        <img src="assets/simpli_intro_cyber_sec.png" alt="Cisco" style="width: 100%; border-radius: 8px; margin-bottom: 0.5rem;">
+        <p><strong>Simplilearn - Intro To Cyber Security</strong></p>
+      </div>
+
+      <div style="flex: 1 1 250px; background-color: #020202; border: 1px solid #00ff00; border-radius: 8px; padding: 1rem;">
+        <img src="assets/tata_cyber_sec.png" alt="Forage" style="width: 100%; border-radius: 8px; margin-bottom: 0.5rem;">
+        <p><strong>TaTa - Cyber Analyst Simulation</strong></p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- 💻 PROJECTS SECTION -->
+<section id="projects" class="section projects-section">
+  <h2 class="section-title">💻 My Cybersecurity Projects</h2>
+
+  <div class="project-grid">
+    <!-- Project 1 -->
+    <div class="project-card" onclick="showPopup('popup1')">
+      <h3>🛡️ Malware Link Checker</h3>
+      <p>Click to view more...</p>
+    </div>
+
+    <!-- Project 2 -->
+    <div class="project-card" onclick="showPopup('popup2')">
+      <h3>🧠 Ethical Hacking Simulator (VR)</h3>
+      <p>Click to view more...</p>
+    </div>
+
+    <!-- Project 3 -->
+    <div class="project-card" onclick="showPopup('popup3')">
+      <h3>🏛️ VR Museum of Ethical Hacking</h3>
+      <p>Click to view more...</p>
+    </div>
+
+    <!-- Project 4 -->
+    <div class="project-card" onclick="showPopup('popup4')">
+      <h3>🌐 Cybercrime Awareness Website</h3>
+      <p>Click to view more...</p>
+    </div>
+  </div>
+</section>
+
+<!-- POPUPS -->
+<!-- Project 1 Popup -->
+<div id="popup1" class="popup-overlay" onclick="closePopup('popup1')">
+  <div class="popup-content" onclick="event.stopPropagation()">
+    <h2>🛡️ Malware Link Checker</h2>
+    <p><strong>Description:</strong> A web app that checks if a URL is malicious or safe using VirusTotal API and pattern matching.</p>
+    <p><strong>Technologies:</strong> Python, Flask, VirusTotal API, Bootstrap</p>
+    <p><strong>Features:</strong> Real-time scan, result categorization, report links</p>
+   <!--  <p><strong>GitHub:</strong> <a href="#" target="_blank">View Project</a></p> -->
+    <button class="close-btn" onclick="closePopup('popup1')">Close</button>
+  </div>
+</div>
+
+<!-- Project 2 Popup -->
+<div id="popup2" class="popup-overlay" onclick="closePopup('popup2')">
+  <div class="popup-content" onclick="event.stopPropagation()">
+    <h2>🧠 Ethical Hacking Simulator (VR)</h2>
+    <p><strong>Description:</strong> A virtual simulator to learn ethical hacking steps like scanning, exploitation, and reporting.</p>
+    <p><strong>Technologies:</strong> Unity, C#, VR Headset Compatibility</p>
+    <p><strong>Features:</strong> Immersive stages, educational feedback, gamified learning</p>
+    <p><strong>Status:</strong> Under development</p>
+    <button class="close-btn" onclick="closePopup('popup2')">Close</button>
+  </div>
+</div>
+
+<!-- Project 3 Popup -->
+<div id="popup3" class="popup-overlay" onclick="closePopup('popup3')">
+  <div class="popup-content" onclick="event.stopPropagation()">
+    <h2>🏛️ VR Museum of Ethical Hacking</h2>
+    <p><strong>Description:</strong> A virtual museum with galleries for famous hackers, major cyber incidents, OWASP Top 10, and interactive exhibits.</p>
+    <p><strong>Technologies:</strong> Unity, Blender, VR Toolkit</p>
+    <p><strong>Features:</strong> Interactive terminals, historical cases, immersive visuals</p>
+    <p><strong>Status:</strong> Under design phase</p>
+    <button class="close-btn" onclick="closePopup('popup3')">Close</button>
+  </div>
+</div>
+
+<!-- Project 4 Popup -->
+<div id="popup4" class="popup-overlay" onclick="closePopup('popup4')">
+  <div class="popup-content" onclick="event.stopPropagation()">
+    <h2>🌐 Cybercrime Awareness Website</h2>
+    <p><strong>Description:</strong> A secure portal to educate users on cybercrime, report incidents, and access curated learning resources.</p>
+    <p><strong>Technologies:</strong> HTML, CSS, JavaScript, PHP, Firebase Authentication</p>
+    <p><strong>Features:</strong> Login authentication, educational blog, reporting system</p>
+    <p><strong>Status:</strong> In progress</p>
+    <button class="close-btn" onclick="closePopup('popup4')">Close</button>
+  </div>
+</div>
+</section>
+<!-- 📞 CONTACT SECTION -->
+<section id="contact" class="section contact-section">
+  <h2 class="section-title">📬 Contact Me</h2>
+  <p>If you want to connect for internships, projects, or collaborations in cybersecurity, feel free to reach out!</p>
+
+  <div class="contact-info">
+    <p><strong>Name:</strong> Saharsh Santosh Hegde</p>
+    <p><strong>Email:</strong> saharshh1@gmail.com</p>
+    <p><strong>Phone:</strong> +91 7208691266</p>
+    <p><strong>Instagram:</strong> <a href="https://instagram.com/saharsh_hegde" target="_blank">@saharsh_hegde</a></p>
+  </div>
+</section>
+
+
+  <script>
+    const introImage = document.getElementById("introImage");
+    const introDiv = document.getElementById("intro");
+    const loginForm = document.getElementById("loginForm");
+    const binaryScreen = document.getElementById("binaryScreen");
+    const mainContent = document.getElementById("mainContent");
+
+    window.onload = () => {
+      introImage.style.opacity = 1;
+      setTimeout(() => {
+        introImage.style.opacity = 0;
+        setTimeout(() => {
+          introDiv.style.display = "none";
+          loginForm.style.display = "flex";
+        }, 2000);
+      }, 5000);
+    };
+
+    function startHacking() {
+      loginForm.style.display = "none";
+      binaryScreen.style.display = "block";
+
+      let binaryText = "";
+      let chars = "01";
+      let interval = setInterval(() => {
+        for (let i = 0; i < 80; i++) {
+          binaryText += chars[Math.floor(Math.random() * 2)];
+        }
+        binaryText += "\n";
+        binaryScreen.textContent = binaryText;
+
+        if (binaryText.length > 3000) {
+          clearInterval(interval);
+          binaryScreen.style.display = "none";
+          mainContent.style.display = "block";
+          document.body.style.overflow = 'auto';
+        }
+      }, 100);
+    }
+
+  </script>
+</body>
+<script>
+  function showPopup(id) {
+    document.getElementById(id).style.display = 'flex';
+  }
+
+  function closePopup(id) {
+    document.getElementById(id).style.display = 'none';
+  }
+</script>
+
+
+</html>
